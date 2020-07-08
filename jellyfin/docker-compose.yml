@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+  jellyfin:
+    image: linuxserver/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Australia/Melbourne
+    volumes:
+      - ./:/config
+      - /mnt/hdd/downloads/torrent/tv:/data/tvshows
+      - /mnt/hdd/downloads/torrent/movies:/data/movies
+      - /mnt/hdd/downloads/deezer:/data/music
+      - /mnt/hdd/downloads/torrent/xxx:/data/xxx
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: pi-net
