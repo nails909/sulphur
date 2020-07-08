@@ -1,0 +1,28 @@
+version: "2.1"
+services:
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Australia/Melbourne
+      - URL=murda.club
+      - SUBDOMAINS=wildcard
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
+      - EMAIL= bittermusic@icloud.com
+      - STAGING=false
+    volumes:
+      - ./:/config
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: pi-net
