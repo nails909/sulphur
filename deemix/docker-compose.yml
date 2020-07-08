@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+
+  deemix:
+    image: registry.gitlab.com/bockiii/deemix-docker
+    container_name: deemix
+    volumes:
+      - /mnt/hdd/downloads/deezer:/downloads
+      - ./deemix:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - ARL=88a0f9362c197d9cc10b1c2d1fc9eabd200cbca7332a3ca064ae7b54f87f8e566ce2eb36ebea2d4d0f12f9db61a985e22ea6199579c44a800ec254ca7c84587c156a49cb96fae0a90d136a156aaa809508aa145257f651f938835b418b3eb88d
+    ports:
+      - 6595:6595
+    restart: always
+     
+networks:
+  default:
+    external:
+      name: pi-net
